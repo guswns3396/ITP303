@@ -1,3 +1,32 @@
+<?php 
+	require "config.php";
+
+	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+	if ($mysqli->connect_errno) {
+		echo "MySQL Connection Error";
+		exit();
+	}
+
+	// echo "success";
+
+	$mysqli->set_charset("utf8");
+	$sql1 = "SELECT * FROM prices;";
+	$sql2 = "SELECT * FROM locations;";
+	$sql3 = "SELECT * FROM room_types;";
+
+	$prices = $mysqli->query($sql1);
+	$locations = $mysqli->query($sql2);
+	$room_types = $mysqli->query($sql3);
+
+	if (!$prices || !$locations || !$room_types) {
+		echo "SQL Error";
+		exit();
+	}
+
+	// var_dump($prices);
+	// var_dump($locations);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +84,7 @@
 		</div>
 
 
-		<form action="results.php" method="">
+		<form action="results.php" method="GET">
 			<!-- name, rating, location, price, room -->
 			<div class="form-group row">
 				<label for="name-id" class="col-sm-3 col-form-label text-sm-right">Name:</label>
@@ -68,11 +97,11 @@
 				<div class="col-sm-9">
 					<select name="location" id="location-id" class="form-control">
 						<option value="" selected>-- All --</option>
-						<option value="1">Parkside</option>
-						<option value="2">North</option>
-						<option value="3">South</option>
-						<option value="4">West</option>
-						<option value="5">Village</option>
+						<?php while($row = $locations->fetch_assoc()) : ?>
+							<option value="<?php echo $row["location_id"]; ?>">
+								<?php echo $row["location_name"]; ?>
+							</option>	
+						<?php endwhile; ?>
 					</select>
 				</div>
 			</div>
@@ -92,27 +121,24 @@
 				<label for="price-id" class="col-sm-3 col-form-label text-sm-right">Price:</label>
 				<div class="col-sm-9">
 					<select name="price" id="price-id" class="form-control">
-						<option value="1">$</option>
-						<option value="2">$$</option>
-						<option value="3">$$$</option>
+						<?php while($row = $prices->fetch_assoc()) : ?>
+							<option value="<?php echo $row["price_id"]; ?>">
+								<?php echo $row["price"]; ?>
+							</option>	
+						<?php endwhile; ?>
 					</select>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-3 col-form-label text-sm-right">Room Type:</label>
 				<div class="col-sm-9">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value="1" id="check1">
-						<label class="form-check-label" for="check1">
-							Single
-						</label>
-					</div>
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value="1" id="check2">
-						<label class="form-check-label" for="check2">
-							Double
-						</label>
-					</div>
+					<select name="room" id="room-id" class="form-control">
+						<?php while($row = $room_types->fetch_assoc()) : ?>
+							<option value="<?php echo $row["room_type_id"]; ?>">
+								<?php echo $row["room_type_name"]; ?>
+							</option>	
+						<?php endwhile; ?>
+					</select>
 				</div>
 			</div>
 			<div class="form-group row">

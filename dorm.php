@@ -1,5 +1,83 @@
 <?php
-	echo $_GET["dorm_id"];
+	require "config.php";
+
+	// echo $_GET["dorm_id"];
+
+	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+	if ($mysqli->connect_errno) {
+		echo "MySQL Connection Error";
+		exit();
+	}
+
+	// echo "success";
+
+	$mysqli->set_charset("utf8");
+
+	$sql = "SELECT * FROM dorms WHERE dorm_id = ";
+	$sql = $sql . $_GET["dorm_id"] . ";";
+	// echo $sql;
+
+	$results = $mysqli->query($sql);
+
+	if (!$results) {
+		echo "SQL Error";
+		exit();
+	}
+
+	$dorm = $results->fetch_assoc();
+	$path = str_replace(" ", "%20", $dorm["dorm_name"]);
+	// echo $path;
+
+	$sql = "SELECT * FROM locations WHERE location_id = ";
+	$sql = $sql . $dorm["location_id"];
+	// echo $sql;
+
+	$results = $mysqli->query($sql);
+
+	if (!$results) {
+		echo "SQL Error";
+		exit();
+	}
+
+	$location = $results->fetch_assoc();
+	// echo $location["location_name"];	
+
+	$sql = "SELECT * FROM prices WHERE price_id = ";
+	$sql = $sql . $dorm["price_id"];
+	// echo $sql;
+
+	$results = $mysqli->query($sql);
+
+	if (!$results) {
+		echo "SQL Error";
+		exit();
+	}
+
+	$price = $results->fetch_assoc();
+	// echo $price["price"];
+
+	$sql = "SELECT * FROM room_types WHERE room_type_id = ";
+	$sql = $sql . $dorm["room_type_id"];
+	// echo $sql;
+
+	$results = $mysqli->query($sql);
+
+	if (!$results) {
+		echo "SQL Error";
+		exit();
+	}
+
+	$room = $results->fetch_assoc();
+	// echo $room["room_type_name"];
+
+	$desc = "";
+	for ($i = 0; $i < 330; $i++) {
+		$desc = $desc . $dorm["dorm_desc"][$i];
+	}
+	$desc = $desc . " ... ";
+	// echo $desc;
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -56,13 +134,13 @@
 		<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 		  <div class="carousel-inner">
 		    <div class="carousel-item active">
-		      <img class="d-block w-100" src="images/irc/irc1.jpg" alt="First slide">
+		      <img class="d-block w-100" src="images/<?php echo $path ; ?>/1.jpg" alt="First slide">
 		    </div>
 		    <div class="carousel-item">
-		      <img class="d-block w-100" src="images/irc/irc2.jpg" alt="Second slide">
+		      <img class="d-block w-100" src="images/<?php echo $path ; ?>/2.jpg" alt="Second slide">
 		    </div>
 		    <div class="carousel-item">
-		      <img class="d-block w-100" src="images/irc/irc3.jpg" alt="Third slide">
+		      <img class="d-block w-100" src="images/<?php echo $path ; ?>/3.jpg" alt="Third slide">
 		    </div>
 		  </div>
 		  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -77,7 +155,9 @@
 
 		<div class="row row-margin justify-content-center">
 			<div class="col col-xs-10 welcome-message">
-				<h2>International Residential College</h2>
+				<h2>
+					<?php echo $dorm["dorm_name"]; ?>
+				</h2>
 			</div>
 		</div>
 
@@ -86,10 +166,10 @@
 				<h4>Quick Overview</h4>
 				<hr>
 				<ul>
-					<li>Location: Parkside</li>
+					<li>Location: <?php echo $location["location_name"]; ?></li>
 					<li>Rating: 3.9</li>
-					<li>Price: $$$</li>
-					<li>Room Type: Single, Double</li>
+					<li>Price: <?php echo $price["price"]; ?></li>
+					<li>Room Type: <?php echo $room["room_type_name"]; ?></li>
 				</ul>
 			</div>
 			<div class="col col-10 col-md-5 box">
@@ -104,8 +184,8 @@
 			<div class="col col-10 box" id="desc-box">
 				<h4>About</h4>
 				<hr>
-				<p id="short">Parkside International Residential College is located in the southwest corner of campus. The four-story building provides housing for 400 students in a variety of five-, six-, seven- and eight-person suites...</p>
-				<p id="long" class="hidden">Parkside International Residential College is located in the southwest corner of campus. The four-story building provides housing for 400 students in a variety of five-, six-, seven- and eight-person suites, mixing single and double rooms. Residents enjoy privacy and independence, as well as the benefits of a residential college. Although IRC has "international" in its name, residents are students of varying backgrounds from the U.S. and around the world. The complex shares facilities with residents of the Parkside area, including a collaborative learning center for group study, formal and informal meeting and seminar spaces, music rooms, lounges, a recreation room with exercise equipment, a laundry facility and a Customer Service Center. The central dining hall features international gourmet cuisine and accommodates special dietary needs, such as gluten-free and vegan. Residents have a required meal plan</p>
+				<p id="short"><?php echo $desc; ?></p>
+				<p id="long" class="hidden"><?php echo $dorm["dorm_desc"]; ?></p>
 				<h6 id="more">show more</h6>
 				<h6 id="less" class="hidden">show less</h6>
 			</div>
@@ -125,6 +205,7 @@
 								<th>Rating</th>
 								<th>Comment</th>
 								<th></th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -133,6 +214,11 @@
 								<td>August 20, 2019</td>
 								<td>4.5</td>
 								<td>Amazing place with amazing people!</td>
+								<td>
+									<a href="review.php" class="btn btn-color rounded-0">
+										UPDATE
+									</a>
+								</td>
 								<td>
 									<a href="dorm.php" class="btn btn-color-danger rounded-0">
 										DELETE
