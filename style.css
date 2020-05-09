@@ -81,9 +81,19 @@ a:hover {
 	padding-left: 30px;
 	padding-right: 30px;
 }
+.btn-color-danger {
+	color: white;
+	background-color: #a3a09b; 
+	padding-left: 30px;
+	padding-right: 30px;
+}
 .btn-color:hover {
 	color: white;
 	background-color: #FFC72C;
+}
+.btn-color-danger:hover {
+	color: white;
+	background-color: #990000;
 }
 .btn-position {
 	position: absolute;
