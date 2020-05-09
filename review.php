@@ -24,10 +24,10 @@
 				        <a class="nav-link" href="index.html"><span class="item-color">Home</span></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="search.html"><span class="item-color">Search</span></a>
+				        <a class="nav-link" href="search.php"><span class="item-color">Search</span></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="browse.html"><span class="item-color">Browse</span></a>
+				        <a class="nav-link" href="browse.php"><span class="item-color">Browse</span></a>
 				      </li>
 				    </ul>
 				  </div>
@@ -54,7 +54,7 @@
 			</div>
 		</div>
 
-		<form action="dorm.html" method="">
+		<form action="dorm.php" method="">
 			<!-- name, rating, location, price, room -->
 			<div class="form-group row">
 				<label for="dorm-id" class="col-sm-3 col-form-label text-sm-right">Dorm:</label>
@@ -102,5 +102,6 @@
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="review.js"></script>
 </body>
 </html>

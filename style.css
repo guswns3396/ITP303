@@ -118,6 +118,7 @@ a:hover {
 
 #desc-box h6 {
 	visibility: hidden;
+	color: #990000;
 }
 #desc-box:hover {
 	cursor: pointer;
