@@ -50,7 +50,7 @@
 <body>
 
 	<div class="container-fluid">
-		<?php include "nav.html"; ?>
+		<?php include "nav.php"; ?>
 
 		<div class="row row-margin">
 			<div class="col col-12 heading">

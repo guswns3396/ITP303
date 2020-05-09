@@ -28,8 +28,22 @@ a:hover {
 #title span {
 	color: #FFC72C;
 }
+.log {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+.log h5 {
+	margin: 0 0;
+}
+.log a {
+	color: white;
+	text-decoration: underline;
+}
 #icon {
-	text-align: right;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
 }
 .button-color {
 	background-color: #e5e4e3;

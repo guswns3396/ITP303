@@ -70,16 +70,6 @@
 		$desc = $desc . " ... ";
 		// echo $desc;
 	}
-	session_start();
-
-	if (!isset($_SESSION["logged"]) || empty($_SESSION["logged"])) {
-		$_SESSION["logged"] = false;
-	}
-
-	$_SESSION["logged"] = true;
-
-	var_dump($_SESSION);
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -93,7 +83,7 @@
 
 	<div class="container-fluid">
 
-		<?php include "nav.html"; ?>
+		<?php include "nav.php"; ?>
 
 		<?php if (!$error) : ?>
 			<!-- slide show -->

@@ -1,3 +1,14 @@
+<?php
+	session_start();
+	
+	if (!isset($_SESSION["logged"]) || empty($_SESSION["logged"])) {
+		$_SESSION["logged"] = false;
+	}
+
+	// $_SESSION["logged"] = true;
+
+	var_dump($_SESSION);
+?>
 <!-- header -->
 <div class="row header">
 
@@ -30,8 +41,21 @@
 		</a>
 	</div>
 
+	<?php if (!$_SESSION["logged"]) : ?>
+		<div class="col col-2 item-color log">
+			<a href="login.php">LOG IN</a>
+		</div>
+	<?php else : ?>
+		<div class="col col-1 item-color log">
+			<h5>user</h5>
+		</div>
+		<div class="col col-1 item-color log">
+			<a href="loggedout.php">LOG OUT</a>
+		</div>
+	<?php endif; ?>
+
 	<!-- icon -->
-	<div class="col col-3" id="icon">
+	<div class="col col-1" id="icon">
 		<img src="images/icon.png" alt="USC icon"/>
 	</div>
 

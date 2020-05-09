@@ -1,12 +1,3 @@
-<?php
-	session_start();
-
-	if (!isset($_SESSION["logged"]) || empty($_SESSION["logged"])) {
-		$_SESSION["logged"] = false;
-	}
-
-	// var_dump($_SESSION);
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +9,7 @@
 <body>
 
 	<div class="container-fluid">
-		<?php include "nav.html"; ?>
+		<?php include "nav.php"; ?>
 
 		<div class="row row-margin">
 			<div class="col col-12 heading">
