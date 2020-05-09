@@ -11,12 +11,14 @@
 	}
 
 	$error = true;
+	$review_err = true;
 
 	if (isset($_GET["dorm_id"]) && !empty($_GET["dorm_id"])) {
 
 		$mysqli->set_charset("utf8");
 
-		$sql = "SELECT * FROM dorms WHERE dorm_id = ";
+		$sql = "SELECT * FROM dorms NATURAL JOIN locations";
+		$sql = $sql . " NATURAL JOIN prices NATURAL JOIN room_types WHERE dorm_id = ";
 		$sql = $sql . $_GET["dorm_id"] . ";";
 		// echo $sql;
 
@@ -28,6 +30,31 @@
 		}
 
 		$dorm = $results->fetch_assoc();
+
+		$sql = "SELECT * FROM reviews NATURAL JOIN users WHERE dorm_id = ";
+		$sql = $sql . $_GET["dorm_id"] . ";";
+		// echo $sql;
+
+		$results = $mysqli->query($sql);
+
+		if (!$results) {
+			echo "SQL Error";
+			exit();
+		}
+
+		$rating = 0;
+		$reviews = [];
+		while ($row = $results->fetch_assoc()) {
+			array_push($reviews, $row);
+			$rating = $rating + $row["review_rating"];
+		}
+		if ($results->num_rows > 0) {
+			$rating = $rating / $results->num_rows;
+		}
+		else {
+			$rating = 0;
+		}
+		// echo $rating;
 	}
 
 	if (isset($dorm) && !empty($dorm)) {
@@ -35,30 +62,6 @@
 
 		$path = str_replace(" ", "%20", $dorm["dorm_name"]);
 		// echo $path;
-
-		$sql = "SELECT * FROM locations WHERE location_id = ";
-		$sql = $sql . $dorm["location_id"];
-		// echo $sql;
-
-		$results = $mysqli->query($sql);
-		$location = $results->fetch_assoc();
-		// echo $location["location_name"];	
-
-		$sql = "SELECT * FROM prices WHERE price_id = ";
-		$sql = $sql . $dorm["price_id"];
-		// echo $sql;
-
-		$results = $mysqli->query($sql);
-		$price = $results->fetch_assoc();
-		// echo $price["price"];
-
-		$sql = "SELECT * FROM room_types WHERE room_type_id = ";
-		$sql = $sql . $dorm["room_type_id"];
-		// echo $sql;
-
-		$results = $mysqli->query($sql);
-		$room = $results->fetch_assoc();
-		// echo $room["room_type_name"];
 
 		$desc = "";
 		for ($i = 0; $i < 330; $i++) {
@@ -130,10 +133,10 @@
 					<h4>Quick Overview</h4>
 					<hr>
 					<ul>
-						<li>Location: <?php echo $location["location_name"]; ?></li>
-						<li>Rating: 3.9</li>
-						<li>Price: <?php echo $price["price"]; ?></li>
-						<li>Room Type: <?php echo $room["room_type_name"]; ?></li>
+						<li>Location: <?php echo $dorm["location_name"]; ?></li>
+						<li>Rating: <?php echo $rating; ?></li>
+						<li>Price: <?php echo $dorm["price"]; ?></li>
+						<li>Room Type: <?php echo $dorm["room_type_name"]; ?></li>
 					</ul>
 				</div>
 				<div class="col col-10 col-md-5 box">
@@ -173,22 +176,14 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>Jack Yang</td>
-									<td>August 20, 2019</td>
-									<td>4.5</td>
-									<td>Amazing place with amazing people!</td>
-									<td>
-										<a href="review.php" class="btn btn-color rounded-0">
-											UPDATE
-										</a>
-									</td>
-									<td>
-										<a href="dorm.php" class="btn btn-color-danger rounded-0">
-											DELETE
-										</a>
-									</td>
-								</tr>
+								<?php for ($i = 0; $i < sizeof($reviews); $i++) : ?>
+									<tr>
+										<td><?php echo $reviews[$i]["user_name"]; ?></td>
+										<td><?php echo $reviews[$i]["review_date"]; ?></td>
+										<td><?php echo $reviews[$i]["review_rating"]; ?></td>
+										<td><?php echo $reviews[$i]["review_comment"]; ?></td>
+									</tr>
+								<?php endfor; ?>
 							</tbody>
 						</table>
 					</div>
