@@ -88,14 +88,14 @@
 			<!-- name, rating, location, price, room -->
 			<div class="form-group row">
 				<label for="name-id" class="col-sm-3 col-form-label text-sm-right">Name:</label>
-				<div class="col-sm-9">
+				<div class="col-sm-6">
 					<input type="text" class="form-control" id="name-id" name="name">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="location-id" class="col-sm-3 col-form-label text-sm-right">Location:</label>
-				<div class="col-sm-9">
-					<select name="location" id="location-id" class="form-control">
+				<div class="col-sm-6">
+					<select name="location_id" id="location-id" class="form-control">
 						<option value="" selected>-- All --</option>
 						<?php while($row = $locations->fetch_assoc()) : ?>
 							<option value="<?php echo $row["location_id"]; ?>">
@@ -106,21 +106,10 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="rating-id" class="col-sm-3 col-form-label text-sm-right">Rating:</label>
-				<div class="col-sm-9">
-					<select name="rating" id="rating-id" class="form-control">
-						<option value="0">0 &lt;</option>
-						<option value="1">1 &lt;</option>
-						<option value="2">2 &lt;</option>
-						<option value="3">3 &lt;</option>
-						<option value="4">4 &lt;</option>
-					</select>
-				</div>
-			</div>
-			<div class="form-group row">
 				<label for="price-id" class="col-sm-3 col-form-label text-sm-right">Price:</label>
-				<div class="col-sm-9">
-					<select name="price" id="price-id" class="form-control">
+				<div class="col-sm-6">
+					<select name="price_id" id="price-id" class="form-control">
+						<option value="" selected>-- All --</option>
 						<?php while($row = $prices->fetch_assoc()) : ?>
 							<option value="<?php echo $row["price_id"]; ?>">
 								<?php echo $row["price"]; ?>
@@ -131,8 +120,9 @@
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-3 col-form-label text-sm-right">Room Type:</label>
-				<div class="col-sm-9">
-					<select name="room" id="room-id" class="form-control">
+				<div class="col-sm-6">
+					<select name="room_type_id" id="room-id" class="form-control">
+						<option value="" selected>-- All --</option>
 						<?php while($row = $room_types->fetch_assoc()) : ?>
 							<option value="<?php echo $row["room_type_id"]; ?>">
 								<?php echo $row["room_type_name"]; ?>

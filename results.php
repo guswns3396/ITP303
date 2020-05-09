@@ -1,3 +1,44 @@
+<?php 
+	require "config.php";
+
+	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+	if ($mysqli->connect_errno) {
+		echo "MySQL Connection Error";
+		exit();
+	}
+
+	// echo "success";
+
+	$mysqli->set_charset("utf8");
+
+	// var_dump($_GET);
+	$sql = "SELECT * FROM dorms NATURAL JOIN locations NATURAL JOIN prices";
+	$sql = $sql . " NATURAL JOIN room_types WHERE 1=1";
+
+	foreach ($_GET as $key => $val) {
+		if (isset($val) && !empty($val)) {
+			$sql = $sql . " AND ";	
+			if ($key == "name") {
+				$sql = $sql . "dorm_name LIKE '%" . $val . "%'";
+			}
+			else {
+				$sql = $sql . $key . " = " . $val;
+			}	
+		}
+	}
+	$sql = $sql . ";";
+	// echo $sql;
+
+	$results = $mysqli->query($sql);
+
+	$error = true;
+	if (isset($results) && !empty($results)) {
+		$error = false;
+	}
+	// var_dump($results);
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +98,7 @@
 		<div class="row">
 			<div class="col-12">
 				<div id="results">
-					Showing 4 result(s).
+					Showing <?php echo $results->num_rows ?> result(s).
 				</div>
 			</div>
 		</div>
@@ -69,60 +110,24 @@
 							<th></th>
 							<th>Name</th>
 							<th>Location</th>
-							<th>Rating</th>
 							<th>Price</th>
 							<th>Room Type</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>
-								<a href="dorm.php" class="btn btn-color rounded-0">
-									GO TO
-								</a>
-							</td>
-							<td>International Residential College</td>
-							<td>Parkside</td>
-							<td>3.9</td>
-							<td>$$$</td>
-							<td>Single, Double</td>
-						</tr>
-						<tr>
-							<td>
-								<a href="dorm.php" class="btn btn-color rounded-0">
-									GO TO
-								</a>
-							</td>
-							<td>International Residential College</td>
-							<td>Parkside</td>
-							<td>3.9</td>
-							<td>$$$</td>
-							<td>Single, Double</td>
-						</tr>
-						<tr>
-							<td>
-								<a href="dorm.php" class="btn btn-color rounded-0">
-									GO TO
-								</a>
-							</td>
-							<td>International Residential College</td>
-							<td>Parkside</td>
-							<td>3.9</td>
-							<td>$$$</td>
-							<td>Single, Double</td>
-						</tr>
-						<tr>
-							<td>
-								<a href="dorm.php" class="btn btn-color rounded-0">
-									GO TO
-								</a>
-							</td>
-							<td>International Residential College</td>
-							<td>Parkside</td>
-							<td>3.9</td>
-							<td>$$$</td>
-							<td>Single, Double</td>
-						</tr>
+						<?php while ($row = $results->fetch_assoc()) : ?>
+							<tr>
+								<td>
+									<a href="dorm.php?dorm_id=<?php echo $row["dorm_id"]; ?>" class="btn btn-color rounded-0">
+										GO TO
+									</a>
+								</td>
+								<td><?php echo $row["dorm_name"]; ?></td>
+								<td><?php echo $row["location_name"]; ?></td>
+								<td><?php echo $row["price"]; ?></td>
+								<td><?php echo $row["room_type_name"]; ?></td>
+							</tr>
+						<?php endwhile; ?>
 					</tbody>
 				</table>
 			</div>
