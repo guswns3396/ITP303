@@ -4,7 +4,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Review</title>
+	<title>Search</title>
 </head>
 <body>
 
@@ -24,10 +24,10 @@
 				        <a class="nav-link" href="index.html"><span class="item-color">Home</span></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="search.html"><span class="item-color">Search</span></a>
+				        <a class="nav-link" href="search.php"><span class="item-color">Search</span></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="browse.html"><span class="item-color">Browse</span></a>
+				        <a class="nav-link" href="browse.php"><span class="item-color">Browse</span></a>
 				      </li>
 				    </ul>
 				  </div>
@@ -50,17 +50,25 @@
 
 		<div class="row row-margin">
 			<div class="col col-12 heading">
-				<h2>Write a Review</h2>
+				<h2>Search</h2>
 			</div>
 		</div>
 
-		<form action="dorm.html" method="">
+
+		<form action="results.php" method="">
 			<!-- name, rating, location, price, room -->
 			<div class="form-group row">
-				<label for="dorm-id" class="col-sm-3 col-form-label text-sm-right">Dorm:</label>
+				<label for="name-id" class="col-sm-3 col-form-label text-sm-right">Name:</label>
 				<div class="col-sm-9">
-					<select name="dorm" id="dorm-id" class="form-control">
-						<option value="1" selected="">International Residential College</option>
+					<input type="text" class="form-control" id="name-id" name="name">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="location-id" class="col-sm-3 col-form-label text-sm-right">Location:</label>
+				<div class="col-sm-9">
+					<select name="location" id="location-id" class="form-control">
+						<option value="" selected>-- All --</option>
+						<option value="1">Parkside</option>
 						<option value="2">North</option>
 						<option value="3">South</option>
 						<option value="4">West</option>
@@ -69,30 +77,53 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="name-id" class="col-sm-3 col-form-label text-sm-right">Name:</label>
+				<label for="rating-id" class="col-sm-3 col-form-label text-sm-right">Rating:</label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control" id="name-id" name="name">
+					<select name="rating" id="rating-id" class="form-control">
+						<option value="0">0 &lt;</option>
+						<option value="1">1 &lt;</option>
+						<option value="2">2 &lt;</option>
+						<option value="3">3 &lt;</option>
+						<option value="4">4 &lt;</option>
+					</select>
 				</div>
 			</div>
-			
 			<div class="form-group row">
-				<label for="comment-id" class="col-sm-3 col-form-label text-sm-right">Comment:</label>
+				<label for="price-id" class="col-sm-3 col-form-label text-sm-right">Price:</label>
 				<div class="col-sm-9">
-					<textarea class="form-control" id="comment-id" rows="3" name="comment"></textarea>
+					<select name="price" id="price-id" class="form-control">
+						<option value="1">$</option>
+						<option value="2">$$</option>
+						<option value="3">$$$</option>
+					</select>
 				</div>
 			</div>
-
-			<div class="row">
+			<div class="form-group row">
+				<label class="col-sm-3 col-form-label text-sm-right">Room Type:</label>
+				<div class="col-sm-9">
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" value="1" id="check1">
+						<label class="form-check-label" for="check1">
+							Single
+						</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" value="1" id="check2">
+						<label class="form-check-label" for="check2">
+							Double
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-9 mt-2">
-					<button type="submit" class="btn btn-color rounded-0">Submit</button>
+					<button type="submit" class="btn btn-color rounded-0">Search</button>
 				</div>
 			</div>
 
 		</form>
-
 	</div>
-		
 
 <!-- 	<div class="footer">
 		Copyright 2020 University of Southern California. All rights reserved.

@@ -4,7 +4,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Results</title>
+	<title>Review</title>
 </head>
 <body>
 
@@ -24,10 +24,10 @@
 				        <a class="nav-link" href="index.html"><span class="item-color">Home</span></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="search.html"><span class="item-color">Search</span></a>
+				        <a class="nav-link" href="search.php"><span class="item-color">Search</span></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="browse.html"><span class="item-color">Browse</span></a>
+				        <a class="nav-link" href="browse.php"><span class="item-color">Browse</span></a>
 				      </li>
 				    </ul>
 				  </div>
@@ -50,83 +50,47 @@
 
 		<div class="row row-margin">
 			<div class="col col-12 heading">
-				<h2>Search Results</h2>
+				<h2>Write a Review</h2>
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="col-12">
-				<div id="results">
-					Showing 4 result(s).
+		<form action="dorm.php" method="">
+			<!-- name, rating, location, price, room -->
+			<div class="form-group row">
+				<label for="dorm-id" class="col-sm-3 col-form-label text-sm-right">Dorm:</label>
+				<div class="col-sm-9">
+					<select name="dorm" id="dorm-id" class="form-control">
+						<option value="1" selected="">International Residential College</option>
+						<option value="2">North</option>
+						<option value="3">South</option>
+						<option value="4">West</option>
+						<option value="5">Village</option>
+					</select>
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-12">
-				<table class="table table-hover table-responsive mt-4">
-					<thead>
-						<tr>
-							<th></th>
-							<th>Name</th>
-							<th>Location</th>
-							<th>Rating</th>
-							<th>Price</th>
-							<th>Room Type</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<a href="dorm.html" class="btn btn-color rounded-0">
-									GO TO
-								</a>
-							</td>
-							<td>International Residential College</td>
-							<td>Parkside</td>
-							<td>3.9</td>
-							<td>$$$</td>
-							<td>Single, Double</td>
-						</tr>
-						<tr>
-							<td>
-								<a href="dorm.html" class="btn btn-color rounded-0">
-									GO TO
-								</a>
-							</td>
-							<td>International Residential College</td>
-							<td>Parkside</td>
-							<td>3.9</td>
-							<td>$$$</td>
-							<td>Single, Double</td>
-						</tr>
-						<tr>
-							<td>
-								<a href="dorm.html" class="btn btn-color rounded-0">
-									GO TO
-								</a>
-							</td>
-							<td>International Residential College</td>
-							<td>Parkside</td>
-							<td>3.9</td>
-							<td>$$$</td>
-							<td>Single, Double</td>
-						</tr>
-						<tr>
-							<td>
-								<a href="dorm.html" class="btn btn-color rounded-0">
-									GO TO
-								</a>
-							</td>
-							<td>International Residential College</td>
-							<td>Parkside</td>
-							<td>3.9</td>
-							<td>$$$</td>
-							<td>Single, Double</td>
-						</tr>
-					</tbody>
-				</table>
+			<div class="form-group row">
+				<label for="name-id" class="col-sm-3 col-form-label text-sm-right">Name:</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" id="name-id" name="name">
+				</div>
 			</div>
-		</div>
+			
+			<div class="form-group row">
+				<label for="comment-id" class="col-sm-3 col-form-label text-sm-right">Comment:</label>
+				<div class="col-sm-9">
+					<textarea class="form-control" id="comment-id" rows="3" name="comment"></textarea>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-9 mt-2">
+					<button type="submit" class="btn btn-color rounded-0">Submit</button>
+				</div>
+			</div>
+
+		</form>
+
 	</div>
 		
 

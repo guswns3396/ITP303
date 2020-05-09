@@ -1,3 +1,15 @@
+<?php 
+	require "config.php";
+
+	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+	if ($mysqli->connect_errno) {
+		echo "MySQL Connection Error";
+		exit();
+	}
+
+	echo "success";
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,10 +37,10 @@
 				        <a class="nav-link" href="index.html"><span class="item-color">Home</span></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="search.html"><span class="item-color">Search</span></a>
+				        <a class="nav-link" href="search.php"><span class="item-color">Search</span></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="browse.html"><span class="item-color">Browse</span></a>
+				        <a class="nav-link" href="browse.php"><span class="item-color">Browse</span></a>
 				      </li>
 				    </ul>
 				  </div>
@@ -93,7 +105,7 @@
 				<h4>Write a Review</h4>
 				<hr>
 				<p>Help the incoming freshmen pick which dorm they should live in. Write a review for the dorm here!</p>
-				<a class="btn btn-color btn-position rounded-0" href="review.html" role="button">REVIEW</a>
+				<a class="btn btn-color btn-position rounded-0" href="review.php" role="button">REVIEW</a>
 			</div>
 		</div>
 
@@ -131,7 +143,7 @@
 								<td>4.5</td>
 								<td>Amazing place with amazing people!</td>
 								<td>
-									<a href="dorm.html" class="btn btn-color-danger rounded-0">
+									<a href="dorm.php" class="btn btn-color-danger rounded-0">
 										DELETE
 									</a>
 								</td>
