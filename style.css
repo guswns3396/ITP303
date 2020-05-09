@@ -116,6 +116,19 @@ a:hover {
 	margin-left: 30px;
 }
 
+#desc-box h6 {
+	visibility: hidden;
+}
+#desc-box:hover {
+	cursor: pointer;
+}
+#desc-box:hover h6 {
+	visibility: visible;
+}
+.hidden {
+	display: none;
+}
+
 .footer-div {
 	position: relative;
 }
