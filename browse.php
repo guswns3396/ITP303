@@ -1,3 +1,26 @@
+<?php 
+	require "config.php";
+
+	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+	if ($mysqli->connect_errno) {
+		echo "MySQL Connection Error";
+		exit();
+	}
+
+	// echo "success";
+
+	$mysqli->set_charset("utf8");
+	$sql = "SELECT * FROM dorms;";
+	$results = $mysqli->query($sql);
+
+	if (!$results) {
+		echo "SQL Error";
+		exit();
+	}
+
+	// var_dump($results);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,34 +79,19 @@
 		</div>
 
 		<div class="row justify-content-around row-margin">
-			<div class="col col-10 col-md-5 box img-box">
-				<a href="dorm.php">
-					<img src="images/irc.jpg" alt="IRC" />
-					<hr>
-					<h4>International Residential College</h4>
-				</a>
-			</div>
-			<div class="col col-10 col-md-5 box img-box">
-				<a href="dorm.php">
-					<img src="images/irc.jpg" alt="IRC" />
-					<hr>
-					<h4>International Residential College</h4>
-				</a>
-			</div>
-			<div class="col col-10 col-md-5 box img-box">
-				<a href="dorm.php">
-					<img src="images/irc.jpg" alt="IRC" />
-					<hr>
-					<h4>International Residential College</h4>
-				</a>
-			</div>
-			<div class="col col-10 col-md-5 box img-box">
-				<a href="dorm.php">
-					<img src="images/irc.jpg" alt="IRC" />
-					<hr>
-					<h4>International Residential College</h4>
-				</a>
-			</div>
+			<?php while($row = $results->fetch_assoc()) :?>
+				<!-- <?php
+					$path = str_replace(" ", "%20", $row["dorm_name"]);
+					echo $path;
+				?> -->
+				<div class="col col-10 col-md-5 box img-box">
+					<a href="dorm.php?dorm_id=<?php echo $row["dorm_id"]; ?>">
+						<img src="images/<?php echo $path ; ?>/1.jpg" alt="dorm" />
+						<hr>
+						<h4><?php echo $row["dorm_name"] ?></h4>
+					</a>
+				</div>
+			<?php endwhile; ?>
 		</div>
 	</div>
 
