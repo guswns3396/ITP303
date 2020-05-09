@@ -182,6 +182,16 @@
 										<td><?php echo $reviews[$i]["review_date"]; ?></td>
 										<td><?php echo $reviews[$i]["review_rating"]; ?></td>
 										<td><?php echo $reviews[$i]["review_comment"]; ?></td>
+										<td>
+											<a href="review.php" class="btn btn-color rounded-0">
+												UPDATE
+											</a>
+										</td>
+										<td>
+											<a href="dorm.php" class="btn btn-color-danger rounded-0">
+												DELETE
+											</a>
+										</td>
 									</tr>
 								<?php endfor; ?>
 							</tbody>
