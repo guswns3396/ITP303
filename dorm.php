@@ -70,6 +70,15 @@
 		$desc = $desc . " ... ";
 		// echo $desc;
 	}
+	session_start();
+
+	if (!isset($_SESSION["logged"]) || empty($_SESSION["logged"])) {
+		$_SESSION["logged"] = false;
+	}
+
+	$_SESSION["logged"] = true;
+
+	var_dump($_SESSION);
 
 ?>
 <!DOCTYPE html>
@@ -143,7 +152,17 @@
 					<h4>Write a Review</h4>
 					<hr>
 					<p>Help the incoming freshmen pick which dorm they should live in. Write a review for the dorm here!</p>
-					<a class="btn btn-color btn-position rounded-0" href="review.php?dorm_id=<?php echo $dorm["dorm_id"]; ?>" role="button">REVIEW</a>
+
+					<?php if ($_SESSION["logged"]) : ?>
+						<form action="review.php" method="POST">
+							<input type="hidden" name="dorm_id" value="<?php echo $dorm["dorm_id"]; ?>"/>
+							<input type="hidden" name="user_id" value="<?php echo $_SESSION["user_id"];?>"/>
+							<button type="submit" class="btn btn-color btn-position rounded-0">REVIEW</button>
+						</form>
+					<?php else : ?>
+						<a class="btn btn-color btn-position rounded-0" href="login.php" role="button">REVIEW</a>
+					<?php endif; ?>
+
 				</div>
 			</div>
 
@@ -183,14 +202,19 @@
 										<td><?php echo $reviews[$i]["review_rating"]; ?></td>
 										<td><?php echo $reviews[$i]["review_comment"]; ?></td>
 										<td>
-											<a href="review.php" class="btn btn-color rounded-0">
-												UPDATE
-											</a>
+											<?php if ($_SESSION["logged"]) : ?>
+												<form action="review.php" method="POST">
+													<input type="hidden" name="user_id" value="<?php echo $_SESSION["user_id"];?>"/>
+													<button type="submit" class="btn btn-color rounded-0">UPDATE</button>
+												</form>
+											<?php endif; ?>
 										</td>
 										<td>
-											<a href="dorm.php" class="btn btn-color-danger rounded-0">
-												DELETE
-											</a>
+											<?php if ($_SESSION["logged"]) : ?>
+												<a href="dorm.php?dorm_id=<?php echo $dorm["dorm_id"]; ?>" class="btn btn-color-danger rounded-0">
+													DELETE
+												</a>
+											<?php endif; ?>
 										</td>
 									</tr>
 								<?php endfor; ?>

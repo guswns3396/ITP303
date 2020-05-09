@@ -1,3 +1,12 @@
+<?php
+	session_start();
+
+	if (!isset($_SESSION["logged"]) || empty($_SESSION["logged"])) {
+		$_SESSION["logged"] = false;
+	}
+
+	// var_dump($_SESSION);
+?>
 <!DOCTYPE html>
 <html>
 <head>
