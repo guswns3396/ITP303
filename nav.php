@@ -1,11 +1,13 @@
 <?php
-	session_start();
-	
-	if (!isset($_SESSION["logged"]) || empty($_SESSION["logged"])) {
-		$_SESSION["logged"] = false;
-	}
+	if (session_status() != PHP_SESSION_ACTIVE) {
+		session_start();
+		
+		if (!isset($_SESSION["logged"]) || empty($_SESSION["logged"])) {
+			$_SESSION["logged"] = false;
+		}
 
-	// $_SESSION["logged"] = true;
+		// $_SESSION["logged"] = true;
+	}
 
 	var_dump($_SESSION);
 ?>
@@ -47,7 +49,7 @@
 		</div>
 	<?php else : ?>
 		<div class="col col-1 item-color log">
-			<h5>user</h5>
+			<h5><?php echo $_SESSION["user_name"]; ?></h5>
 		</div>
 		<div class="col col-1 item-color log">
 			<a href="loggedout.php">LOG OUT</a>

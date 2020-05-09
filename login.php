@@ -60,9 +60,15 @@
 
 		<form action="loggedin.php" method="POST">
 			<div class="form-group row">
-				<label for="name-id" class="col-sm-3 col-form-label text-sm-right">Name:</label>
+				<label for="name-id" class="col-sm-3 col-form-label text-sm-right">User Name:</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" id="name-id" name="name">
+					<input type="text" class="form-control" id="name-id" name="user_name">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="pw-id" class="col-sm-3 col-form-label text-sm-right">Password:</label>
+				<div class="col-sm-6">
+					<input type="password" class="form-control" id="pw-id" name="user_pass">
 				</div>
 			</div>
 			<div class="form-group row">
