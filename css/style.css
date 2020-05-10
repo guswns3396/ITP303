@@ -154,15 +154,3 @@ a:hover {
 .custom-range::-webkit-slider-thumb {
 	background: #FFC72C;
 }
-
-.footer-div {
-	position: relative;
-}
-.footer {
-	position: absolute;
-	bottom:0;
-	width: 100%;
-	text-align: center;
-	color: #e5e4e3;
-	background-color: #514F4D;
-}
