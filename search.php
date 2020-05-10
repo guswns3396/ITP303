@@ -56,6 +56,18 @@
 				</div>
 			</div>
 			<div class="form-group row">
+				<label for="rating-id" class="col-sm-3 col-form-label text-sm-right">Rating:</label>
+				<div class="col-sm-6">
+					<select name="review_rating" id="rating-id" class="form-control">
+						<option value="0" selected>0 &lt;</option>
+						<option value="1">1 &lt;</option>
+						<option value="2">2 &lt;</option>
+						<option value="3">3 &lt;</option>
+						<option value="4">4 &lt;</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group row">
 				<label for="location-id" class="col-sm-3 col-form-label text-sm-right">Location:</label>
 				<div class="col-sm-6">
 					<select name="location_id" id="location-id" class="form-control">
