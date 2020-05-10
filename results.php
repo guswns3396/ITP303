@@ -13,14 +13,23 @@
 	$mysqli->set_charset("utf8");
 
 	// var_dump($_GET);
-	$sql = "SELECT * FROM dorms NATURAL JOIN locations NATURAL JOIN prices";
-	$sql = $sql . " NATURAL JOIN room_types WHERE 1=1";
+	$sql = "SELECT * FROM";
+	$sql = $sql . " (SELECT * FROM dorms NATURAL JOIN locations NATURAL JOIN prices";
+	$sql = $sql . " NATURAL JOIN room_types) D";
+	$sql = $sql . " LEFT OUTER JOIN";
+	$sql = $sql . " (SELECT dorm_id, AVG(review_rating) AS review_rating FROM reviews";
+	$sql = $sql . " GROUP BY dorm_id) R";
+	$sql = $sql . " ON D.dorm_id = R.dorm_id";
+	$sql = $sql . " WHERE 1=1";
 
 	foreach ($_GET as $key => $val) {
 		if (isset($val) && !empty($val)) {
 			$sql = $sql . " AND ";	
 			if ($key == "name") {
 				$sql = $sql . "dorm_name LIKE '%" . $val . "%'";
+			}
+			elseif ($key == "review_rating") {
+				$sql = $sql . $val . " < " . $key;
 			}
 			else {
 				$sql = $sql . $key . " = " . $val;
