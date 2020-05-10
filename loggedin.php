@@ -15,6 +15,8 @@
 	$result = $stmt->get_result();
 	$user = $result->fetch_assoc();
 
+	$stmt->close();
+
 	if (isset($user) && !empty($user)) {
 		session_start();
 

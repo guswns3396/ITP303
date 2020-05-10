@@ -22,9 +22,9 @@
 
 	var_dump($_POST);
 
-	$isUpdate = false;
+	$isUpdate = 0;
 	if (isset($_POST["review_comment"]) && !empty($_POST["review_comment"])) {
-		$isUpdate = true;
+		$isUpdate = 1;
 	}
 ?>
 <!DOCTYPE html>
@@ -47,10 +47,11 @@
 		</div>
 
 		<form action="review_confirmation.php" method="POST">
+			<input type="hidden" name="isUpdate" value="<?php echo $isUpdate; ?>"/>
 			<div class="form-group row">
 				<label for="name-id" class="col-sm-3 col-form-label text-sm-right">Name:</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" id="name-id" name="user_name" placeholder="<?php echo $_SESSION["user_name"]; ?>" readonly>
+					<input type="text" class="form-control" id="name-id" name="user_name" placeholder="<?php echo $_SESSION["user_name"]; ?>" value="<?php echo $_SESSION["user_name"]; ?>" readonly>
 				</div>
 			</div>
 			<div class="form-group row">
@@ -85,7 +86,7 @@
 			<div class="form-group row">
 				<label for="comment-id" class="col-sm-3 col-form-label text-sm-right">Comment:</label>
 				<div class="col-sm-6">
-					<textarea class="form-control" id="comment-id" rows="3" name="user_comment"></textarea>
+					<textarea class="form-control" id="comment-id" rows="3" name="review_comment"></textarea>
 				</div>
 			</div>
 
