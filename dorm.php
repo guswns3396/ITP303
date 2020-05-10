@@ -204,7 +204,7 @@
 												<form action="delete_confirmation.php" method="POST">
 													<input type="hidden" name="review_id" value="<?php echo $reviews[$i]["review_id"]; ?>"/>
 													<input type="hidden" name="dorm_id" value="<?php echo $dorm["dorm_id"]; ?>"/>
-													<button type="submit" class="btn btn-color-danger rounded-0">DELETE</button>
+													<button type="submit" class="btn btn-color-danger rounded-0" onclick="return confirm('Are you sure you want to delete this review?')">DELETE</button>
 												</form>
 											<?php endif; ?>
 										</td>
