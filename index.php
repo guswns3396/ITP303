@@ -1,15 +1,26 @@
+<?php 
+	require "config.php";
+
+	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+	if ($mysqli->connect_errno) {
+		echo "MySQL Connection Error";
+		exit();
+	}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>Home</title>
 </head>
 <body>
 
 	<div class="container-fluid">
-		<?php include "nav.html"; ?>
+		<?php include "nav.php"; ?>
 
 		<!-- top section -->
 		<div class="row home-image">

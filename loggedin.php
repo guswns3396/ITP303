@@ -8,18 +8,27 @@
 		exit();
 	}
 
-	// echo "success";
+	$stmt = $mysqli->prepare("SELECT * FROM users WHERE user_name = ?");
+	$stmt->bind_param("s", $_POST["user_name"]);
+	$stmt->execute();
 
-	$mysqli->set_charset("utf8");
-	$sql = "SELECT * FROM dorms;";
-	$results = $mysqli->query($sql);
+	$result = $stmt->get_result();
+	$user = $result->fetch_assoc();
 
-	if (!$results) {
-		echo "SQL Error";
-		exit();
+	$stmt->close();
+
+	if (isset($user) && !empty($user)) {
+		session_start();
+
+		if ($_POST["user_pass"] == $user["user_pass"]) {
+			$_SESSION["logged"] = true;
+			$_SESSION["user_name"] = $user["user_name"];
+			header("Location: ./index.php");
+		}
+		else {
+			$_SESSION["logged"] = false;
+		}
 	}
-
-	// var_dump($results);
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,7 +36,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Browse</title>
+	<title>Log In Status</title>
 </head>
 <body>
 
@@ -35,34 +44,18 @@
 
 		<?php include "nav.php"; ?>
 
-		<div class="row row-margin">
-			<div class="col col-12 heading">
-				<h2>Browse</h2>
-			</div>
-		</div>
-
-		<div class="row justify-content-around row-margin">
-			<?php while($row = $results->fetch_assoc()) :?>
-				<!-- <?php
-					$path = str_replace(" ", "%20", $row["dorm_name"]);
-					echo $path;
-				?> -->
-				<div class="col col-10 col-md-5 box img-box">
-					<a href="dorm.php?dorm_id=<?php echo $row["dorm_id"]; ?>">
-						<img src="images/<?php echo $path ; ?>/1.jpg" alt="dorm" />
-						<hr>
-						<h4><?php echo $row["dorm_name"] ?></h4>
-					</a>
+		<?php if (!$_SESSION["logged"]) : ?>
+			<div class="row row-margin justify-content-center">
+				<div class="col col-xs-10 welcome-message">
+					<h2>
+						Username / Password Incorrect :(
+					</h2>
 				</div>
-			<?php endwhile; ?>
-		</div>
-	</div>
+			</div>
+		<?php endif; ?>
 
-	<!-- <div class="footer-div">
-		<div class="footer">
-			Copyright 2020 University of Southern California. All rights reserved.
-		</div>
-	</div> -->
+
+	</div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
