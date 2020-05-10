@@ -191,19 +191,21 @@
 										<td><?php echo $reviews[$i]["review_rating"]; ?></td>
 										<td><?php echo $reviews[$i]["review_comment"]; ?></td>
 										<td>
-											<?php if ($_SESSION["logged"]) : ?>
+											<?php if ($_SESSION["logged"] && ($_SESSION["user_name"] == $reviews[$i]["user_name"])) : ?>
 												<form action="review.php" method="POST">
-													<input type="hidden" name="dorm_id" value="<?php echo $dorm["dorm_id"]; ?>"/>
-													<input type="hidden" name="review_comment" value="<?php echo $reviews[$i]["review_comment"];?>"/>
+													<input type="hidden" name="isUpdate" value="1"/>
+													<input type="hidden" name="review_id" value="<?php echo $reviews[$i]["review_id"]; ?>"/>
 													<button type="submit" class="btn btn-color rounded-0">UPDATE</button>
 												</form>
 											<?php endif; ?>
 										</td>
 										<td>
-											<?php if ($_SESSION["logged"]) : ?>
-												<a href="dorm.php?dorm_id=<?php echo $dorm["dorm_id"]; ?>" class="btn btn-color-danger rounded-0">
-													DELETE
-												</a>
+											<?php if ($_SESSION["logged"] && ($_SESSION["user_name"] == $reviews[$i]["user_name"] || $_SESSION["user_admin"])) : ?>
+												<form action="delete_confirmation.php" method="POST">
+													<input type="hidden" name="review_id" value="<?php echo $reviews[$i]["review_id"]; ?>"/>
+													<input type="hidden" name="dorm_id" value="<?php echo $dorm["dorm_id"]; ?>"/>
+													<button type="submit" class="btn btn-color-danger rounded-0">DELETE</button>
+												</form>
 											<?php endif; ?>
 										</td>
 									</tr>

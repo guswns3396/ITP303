@@ -16,7 +16,21 @@
 	var_dump($_POST);
 
 	if ($isUpdate) {
-		echo "";
+		$sql = "UPDATE reviews SET review_comment = ?, review_rating = ?, dorm_id = ? ";
+		$sql = $sql . "WHERE review_id = ?";
+
+		$stmt = $mysqli->prepare($sql);
+		$stmt->bind_param("sdii", $_POST["review_comment"], $_POST["review_rating"], $_POST["dorm_id"], $_POST["review_id"]);
+
+		$executed = $stmt->execute();
+		if(!$executed) {
+			echo $mysqli->error;
+			exit();
+		}
+
+		echo $stmt->affected_rows;
+
+		$stmt->close();
 	}
 	else {
 		$sql = "INSERT INTO reviews (review_comment, review_rating, review_date, user_name, dorm_id) ";
