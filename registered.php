@@ -19,6 +19,8 @@
 	}
 	if (isset($_POST["user_pass"]) && !empty($_POST["user_pass"])) {
 		$passSet = true;
+		$password = hash('sha256', $_POST["user_pass"]);
+		// echo $password;
 	}
 	if (isset($_POST["user_email"]) && !empty($_POST["user_email"])) {
 		$mailSet = true;
@@ -30,7 +32,7 @@
 		$sql = $sql . "VALUES (?, ?, 0, ?)";
 
 		$stmt = $mysqli->prepare($sql);
-		$stmt->bind_param("sss", $_POST["user_name"], $_POST["user_pass"], $_POST["user_email"]);
+		$stmt->bind_param("sss", $_POST["user_name"], $password, $_POST["user_email"]);
 
 		$executed = $stmt->execute();
 
