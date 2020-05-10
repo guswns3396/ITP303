@@ -154,3 +154,10 @@ a:hover {
 .custom-range::-webkit-slider-thumb {
 	background: #FFC72C;
 }
+
+#page .page-color {
+	color: #990000;
+}
+#page .page-active {
+	background: #FFC72C;
+}
