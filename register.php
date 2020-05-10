@@ -58,6 +58,33 @@
 			</div>
 		</div>
 
+		<form action="registered.php" method="POST">
+			<div class="form-group row">
+				<label for="email-id" class="col-sm-3 col-form-label text-sm-right">Email:</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" id="email-id" name="user_email">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="name-id" class="col-sm-3 col-form-label text-sm-right">User Name:</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" id="name-id" name="user_name">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="pw-id" class="col-sm-3 col-form-label text-sm-right">Password:</label>
+				<div class="col-sm-6">
+					<input type="password" class="form-control" id="pw-id" name="user_pass">
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-9 mt-2">
+					<button type="submit" class="btn btn-color rounded-0">SIGN UP</button>
+				</div>
+			</div>
+		</form>
+
 		
 	</div>
 		
