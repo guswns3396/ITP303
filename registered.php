@@ -43,6 +43,7 @@
 				session_start();
 				$_SESSION["logged"] = true;
 				$_SESSION["user_name"] = $_POST["user_name"];
+				$_SESSION["user_admin"] = 0;
 
 				header("Location: ./index.php");
 			}

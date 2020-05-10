@@ -16,7 +16,7 @@
 	var_dump($_POST);
 
 	if ($isUpdate) {
-		echo "";
+		$sql = "UPDATE "
 	}
 	else {
 		$sql = "INSERT INTO reviews (review_comment, review_rating, review_date, user_name, dorm_id) ";

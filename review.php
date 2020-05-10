@@ -22,8 +22,18 @@
 
 	var_dump($_POST);
 
+	$sql = "SELECT * FROM reviews WHERE review_id = ";
+	$sql = $sql . $_POST["review_id"];
+
+	$result = $mysqli->query($sql);
+	if (!$result) {
+		echo "SQL Error";
+		exit();
+	}
+	$review = $result->fetch_assoc();
+
 	$isUpdate = 0;
-	if (isset($_POST["review_comment"]) && !empty($_POST["review_comment"])) {
+	if (isset($_POST["isUpdate"]) && !empty($_POST["isUpdate"])) {
 		$isUpdate = 1;
 	}
 ?>
@@ -59,7 +69,7 @@
 				<div class="col-sm-6">
 					<select name="dorm_id" id="dorm-id" class="form-control">
 						<?php while ($row = $dorms->fetch_assoc()) : ?>
-							<?php if ($row["dorm_id"] == $_POST["dorm_id"]) : ?>
+							<?php if ($row["dorm_id"] == $review["dorm_id"]) : ?>
 								<option value="<?php echo $row["dorm_id"]; ?>" selected>
 									<?php echo $row["dorm_name"]; ?>
 								</option>
@@ -86,7 +96,7 @@
 			<div class="form-group row">
 				<label for="comment-id" class="col-sm-3 col-form-label text-sm-right">Comment:</label>
 				<div class="col-sm-6">
-					<textarea class="form-control" id="comment-id" rows="3" name="review_comment"></textarea>
+					<textarea class="form-control" id="comment-id" rows="3" name="review_comment"><?php if ($isUpdate) echo $review["review_comment"]; ?></textarea>
 				</div>
 			</div>
 

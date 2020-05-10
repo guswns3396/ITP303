@@ -23,6 +23,7 @@
 		if ($_POST["user_pass"] == $user["user_pass"]) {
 			$_SESSION["logged"] = true;
 			$_SESSION["user_name"] = $user["user_name"];
+			$_SESSION["user_admin"] = $user["user_admin"];
 			header("Location: ./index.php");
 		}
 		else {
