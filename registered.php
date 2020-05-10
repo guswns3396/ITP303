@@ -52,6 +52,7 @@
 		}
 		else {
 			echo $mysqli->error;
+			$msg = "Try a different username?";
 			$stmt->close();
 		}
 	}
@@ -77,6 +78,7 @@
 					<h2>
 						Registration Failed :(
 					</h2>
+					<?php if (isset($msg) && !empty($msg)) echo "<h4>" . $msg . "</h4>"; ?>
 				</div>
 			</div>
 		<?php endif; ?>
