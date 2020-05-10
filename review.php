@@ -58,6 +58,10 @@
 
 		<form action="review_confirmation.php" method="POST">
 			<input type="hidden" name="isUpdate" value="<?php echo $isUpdate; ?>"/>
+			<?php if ($isUpdate) : ?>
+				<input type="hidden" name="review_id" value="<?php echo $_POST["review_id"]; ?>"/>
+			<?php endif; ?>
+			<input type="hidden" name="isUpdate" value="<?php echo $isUpdate; ?>"/>
 			<div class="form-group row">
 				<label for="name-id" class="col-sm-3 col-form-label text-sm-right">Name:</label>
 				<div class="col-sm-6">
