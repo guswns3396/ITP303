@@ -41,9 +41,9 @@
 
 	$results = $mysqli->query($sql);
 
-	$error = true;
-	if (isset($results) && !empty($results)) {
-		$error = false;
+	if (!$results) {
+		echo "SQL Error";
+		exit();
 	}
 	// var_dump($results);
 
