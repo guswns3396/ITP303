@@ -8,6 +8,10 @@
 		exit();
 	}
 
+	if (!isset($_POST) || empty($_POST)) {
+		header("location: ./index.php");
+	}
+
 	$isUpdate = (int)$_POST["isUpdate"];
 	date_default_timezone_set('America/Los_Angeles');
 	$date = date("Y-m-d");
