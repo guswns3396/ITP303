@@ -11,6 +11,18 @@
 	// echo "success";
 
 	$mysqli->set_charset("utf8");
+
+	if (session_status() != PHP_SESSION_ACTIVE) {
+		session_start();
+		
+		if (!isset($_SESSION["logged"]) || empty($_SESSION["logged"])) {
+			$_SESSION["logged"] = false;
+		}
+	}
+	if (!$_SESSION["logged"]) {
+		header("location: ./login.php");
+	}
+
 	$sql = "SELECT * FROM dorms;";
 
 	$dorms = $mysqli->query($sql);
