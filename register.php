@@ -63,18 +63,27 @@
 				<label for="email-id" class="col-sm-3 col-form-label text-sm-right">Email:</label>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" id="email-id" name="user_email">
+					<small class="form-text text-danger hidden">
+						You must type in a valid email
+					</small>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="name-id" class="col-sm-3 col-form-label text-sm-right">User Name:</label>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" id="name-id" name="user_name">
+					<small class="form-text text-danger hidden">
+						You must type in a valid user name
+					</small>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="pw-id" class="col-sm-3 col-form-label text-sm-right">Password:</label>
 				<div class="col-sm-6">
 					<input type="password" class="form-control" id="pw-id" name="user_pass">
+					<small class="form-text text-danger hidden">
+						Your password must be at least 7 characters
+					</small>
 				</div>
 			</div>
 			<div class="form-group row">
@@ -97,5 +106,6 @@
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="js/register.js"></script>
 </body>
 </html>

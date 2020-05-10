@@ -63,7 +63,7 @@
 				<label for="name-id" class="col-sm-3 col-form-label text-sm-right">User Name:</label>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" id="name-id" name="user_name">
-					<small id="name-help" class="form-text text-danger hidden">
+					<small class="form-text text-danger hidden">
 						You must type in a user name
 					</small>
 				</div>
@@ -72,7 +72,7 @@
 				<label for="pw-id" class="col-sm-3 col-form-label text-sm-right">Password:</label>
 				<div class="col-sm-6">
 					<input type="password" class="form-control" id="pw-id" name="user_pass">
-					<small id="pw-help" class="form-text text-danger hidden">
+					<small class="form-text text-danger hidden">
 						You must type in a password
 					</small>
 				</div>
