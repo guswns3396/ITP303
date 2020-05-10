@@ -4,7 +4,7 @@
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 	if ($mysqli->connect_errno) {
-		echo "MySQL Connection Error";
+		header("location: ./error.php");
 		exit();
 	}
 
@@ -20,7 +20,7 @@
 	$room_types = $mysqli->query($sql3);
 
 	if (!$prices || !$locations || !$room_types) {
-		echo "SQL Error";
+		header("location: ./error.php");
 		exit();
 	}
 

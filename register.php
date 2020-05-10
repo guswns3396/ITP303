@@ -4,7 +4,7 @@
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 	if ($mysqli->connect_errno) {
-		echo "MySQL Connection Error";
+		header("location: ./error.php");
 		exit();
 	}
 
@@ -32,9 +32,9 @@
 
 	$results = $mysqli->query($sql);
 
-	$error = true;
-	if (isset($results) && !empty($results)) {
-		$error = false;
+	if (!$results) {
+		header("location: ./error.php");
+		exit();
 	}
 	// var_dump($results);
 

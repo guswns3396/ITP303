@@ -4,7 +4,7 @@
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 	if ($mysqli->connect_errno) {
-		echo "MySQL Connection Error";
+		header("location: ./error.php");
 		exit();
 	}
 
@@ -16,8 +16,8 @@
 	date_default_timezone_set('America/Los_Angeles');
 	$date = date("Y-m-d");
 	
-	echo $date;
-	var_dump($_POST);
+	// echo $date;
+	// var_dump($_POST);
 
 	if ($isUpdate) {
 		$sql = "UPDATE reviews SET review_comment = ?, review_rating = ?, dorm_id = ? ";
@@ -28,11 +28,11 @@
 
 		$executed = $stmt->execute();
 		if(!$executed) {
-			echo $mysqli->error;
+			header("location: ./error.php");
 			exit();
 		}
 
-		echo $stmt->affected_rows;
+		// echo $stmt->affected_rows;
 
 		$stmt->close();
 	}
@@ -45,7 +45,7 @@
 
 		$executed = $stmt->execute();
 		if(!$executed) {
-			echo $mysqli->error;
+			header("location: ./error.php");
 			exit();
 		}
 		// echo $stmt->affected_rows;
