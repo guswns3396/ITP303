@@ -49,7 +49,7 @@
 			$rating = $rating + $row["review_rating"];
 		}
 		if ($results->num_rows > 0) {
-			$rating = $rating / $results->num_rows;
+			$rating = number_format($rating / $results->num_rows, 1);
 		}
 		else {
 			$rating = 0;
