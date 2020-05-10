@@ -144,6 +144,10 @@ a:hover {
 	display: none;
 }
 
+#signup {
+	margin-left: 10px;
+}
+
 .custom-range::-webkit-slider-runnable-track {
 	background: #990000;
 }
