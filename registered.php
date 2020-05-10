@@ -4,11 +4,11 @@
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 	if ($mysqli->connect_errno) {
-		echo "MySQL Connection Error";
+		header("location: ./error.php");
 		exit();
 	}
 
-	var_dump($_POST);
+	// var_dump($_POST);
 
 	$nameSet = false;
 	$passSet = false;
@@ -51,7 +51,7 @@
 			}
 		}
 		else {
-			echo $mysqli->error;
+			// echo $mysqli->error;
 			$msg = "Try a different username?";
 			$stmt->close();
 		}

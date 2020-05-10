@@ -4,23 +4,35 @@
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 	if ($mysqli->connect_errno) {
-		echo "MySQL Connection Error";
+		header("location: ./error.php");
 		exit();
 	}
 
 	// echo "success";
 
 	$mysqli->set_charset("utf8");
+
+	if (session_status() != PHP_SESSION_ACTIVE) {
+		session_start();
+		
+		if (!isset($_SESSION["logged"]) || empty($_SESSION["logged"])) {
+			$_SESSION["logged"] = false;
+		}
+	}
+	if (!$_SESSION["logged"]) {
+		header("location: ./login.php");
+	}
+
 	$sql = "SELECT * FROM dorms;";
 
 	$dorms = $mysqli->query($sql);
 
 	if (!$dorms) {
-		echo "SQL Error";
+		header("location: ./error.php");
 		exit();
 	}
 
-	var_dump($_POST);
+	// var_dump($_POST);
 
 	$isUpdate = 0;
 	if (isset($_POST["isUpdate"]) && !empty($_POST["isUpdate"])) {
@@ -30,7 +42,7 @@
 
 		$result = $mysqli->query($sql);
 		if (!$result) {
-			echo "SQL Error";
+			header("location: ./error.php");
 			exit();
 		}
 		$review = $result->fetch_assoc();

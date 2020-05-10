@@ -4,7 +4,7 @@
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 	if ($mysqli->connect_errno) {
-		echo "MySQL Connection Error";
+		header("location: ./error.php");
 		exit();
 	}
 
@@ -15,10 +15,10 @@
 
 	$executed = $stmt->execute();
 	if(!$executed) {
-		echo $mysqli->error;
+		header("location: ./error.php");
 		exit();
 	}
-	echo $stmt->affected_rows;
+	// echo $stmt->affected_rows;
 
 	$stmt->close();
 
