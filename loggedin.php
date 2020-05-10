@@ -20,7 +20,7 @@
 	if (isset($user) && !empty($user)) {
 		session_start();
 
-		if ($_POST["user_pass"] == $user["user_pass"]) {
+		if (hash('sha256',$_POST["user_pass"]) == $user["user_pass"]) {
 			$_SESSION["logged"] = true;
 			$_SESSION["user_name"] = $user["user_name"];
 			$_SESSION["user_admin"] = $user["user_admin"];
