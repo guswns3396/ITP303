@@ -32,7 +32,7 @@
 		exit();
 	}
 
-	var_dump($_POST);
+	// var_dump($_POST);
 
 	$isUpdate = 0;
 	if (isset($_POST["isUpdate"]) && !empty($_POST["isUpdate"])) {

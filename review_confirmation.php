@@ -16,8 +16,8 @@
 	date_default_timezone_set('America/Los_Angeles');
 	$date = date("Y-m-d");
 	
-	echo $date;
-	var_dump($_POST);
+	// echo $date;
+	// var_dump($_POST);
 
 	if ($isUpdate) {
 		$sql = "UPDATE reviews SET review_comment = ?, review_rating = ?, dorm_id = ? ";
@@ -32,7 +32,7 @@
 			exit();
 		}
 
-		echo $stmt->affected_rows;
+		// echo $stmt->affected_rows;
 
 		$stmt->close();
 	}

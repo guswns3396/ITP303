@@ -9,7 +9,7 @@
 		// $_SESSION["logged"] = true;
 	}
 
-	var_dump($_SESSION);
+	// var_dump($_SESSION);
 ?>
 <!-- header -->
 <div class="row header">

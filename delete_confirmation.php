@@ -18,7 +18,7 @@
 		header("location: ./error.php");
 		exit();
 	}
-	echo $stmt->affected_rows;
+	// echo $stmt->affected_rows;
 
 	$stmt->close();
 
