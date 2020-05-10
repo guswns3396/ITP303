@@ -4,7 +4,7 @@
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 	if ($mysqli->connect_errno) {
-		echo "MySQL Connection Error";
+		header("location: ./error.php");
 		exit();
 	}
 
@@ -28,7 +28,7 @@
 	$dorms = $mysqli->query($sql);
 
 	if (!$dorms) {
-		echo "SQL Error";
+		header("location: ./error.php");
 		exit();
 	}
 
@@ -42,7 +42,7 @@
 
 		$result = $mysqli->query($sql);
 		if (!$result) {
-			echo "SQL Error";
+			header("location: ./error.php");
 			exit();
 		}
 		$review = $result->fetch_assoc();
