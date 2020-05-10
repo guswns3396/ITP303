@@ -146,7 +146,6 @@
 					<?php if ($_SESSION["logged"]) : ?>
 						<form action="review.php" method="POST">
 							<input type="hidden" name="dorm_id" value="<?php echo $dorm["dorm_id"]; ?>"/>
-							<input type="hidden" name="user_id" value="<?php echo $_SESSION["user_id"];?>"/>
 							<button type="submit" class="btn btn-color btn-position rounded-0">REVIEW</button>
 						</form>
 					<?php else : ?>
@@ -171,7 +170,7 @@
 
 			<div class="row justify-content-center row-margin">
 				<div class="col col-12 box">
-					<h4>Ratings</h4>
+					<h4>Reviews</h4>
 					<div class="table-responsive review">
 						<table class="table table-hover mt-4">
 							<thead>
@@ -194,7 +193,8 @@
 										<td>
 											<?php if ($_SESSION["logged"]) : ?>
 												<form action="review.php" method="POST">
-													<input type="hidden" name="user_id" value="<?php echo $_SESSION["user_id"];?>"/>
+													<input type="hidden" name="dorm_id" value="<?php echo $dorm["dorm_id"]; ?>"/>
+													<input type="hidden" name="review_comment" value="<?php echo $reviews[$i]["review_comment"];?>"/>
 													<button type="submit" class="btn btn-color rounded-0">UPDATE</button>
 												</form>
 											<?php endif; ?>

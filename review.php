@@ -1,3 +1,32 @@
+<?php 
+	require "config.php";
+
+	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+	if ($mysqli->connect_errno) {
+		echo "MySQL Connection Error";
+		exit();
+	}
+
+	// echo "success";
+
+	$mysqli->set_charset("utf8");
+	$sql = "SELECT * FROM dorms;";
+
+	$dorms = $mysqli->query($sql);
+
+	if (!$dorms) {
+		echo "SQL Error";
+		exit();
+	}
+
+	var_dump($_POST);
+
+	$isUpdate = false;
+	if (isset($_POST["review_comment"]) && !empty($_POST["review_comment"])) {
+		$isUpdate = true;
+	}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,37 +46,52 @@
 			</div>
 		</div>
 
-		<form action="dorm.php" method="">
-			<!-- name, rating, location, price, room -->
+		<form action="review_confirmation.php" method="POST">
 			<div class="form-group row">
-				<label for="dorm-id" class="col-sm-3 col-form-label text-sm-right">Dorm:</label>
-				<div class="col-sm-9">
-					<select name="dorm" id="dorm-id" class="form-control">
-						<option value="1" selected="">International Residential College</option>
-						<option value="2">North</option>
-						<option value="3">South</option>
-						<option value="4">West</option>
-						<option value="5">Village</option>
-					</select>
+				<label for="name-id" class="col-sm-3 col-form-label text-sm-right">Name:</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" id="name-id" name="user_name" placeholder="<?php echo $_SESSION["user_name"]; ?>" readonly>
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="name-id" class="col-sm-3 col-form-label text-sm-right">Name:</label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control" id="name-id" name="name">
+				<label for="dorm-id" class="col-sm-3 col-form-label text-sm-right">Dorm:</label>
+				<div class="col-sm-6">
+					<select name="dorm_id" id="dorm-id" class="form-control">
+						<?php while ($row = $dorms->fetch_assoc()) : ?>
+							<?php if ($row["dorm_id"] == $_POST["dorm_id"]) : ?>
+								<option value="<?php echo $row["dorm_id"]; ?>" selected>
+									<?php echo $row["dorm_name"]; ?>
+								</option>
+							<?php else : ?>
+								<option value="<?php echo $row["dorm_id"]; ?>">
+									<?php echo $row["dorm_name"]; ?>
+								</option>
+							<?php endif; ?>
+						<?php endwhile; ?>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="rating-id" class="col-sm-3 col-form-label text-sm-right">Rating:</label>
+				<div class="col-sm-5">
+					<input type="range" class="custom-range" min="0" max="5" step="0.1" id="rating-id" name="review_rating">
+				</div>
+				<div class="col-sm-1" id="slider-val">
+					<span>2.5</span>
 				</div>
 			</div>
 			
 			<div class="form-group row">
 				<label for="comment-id" class="col-sm-3 col-form-label text-sm-right">Comment:</label>
-				<div class="col-sm-9">
-					<textarea class="form-control" id="comment-id" rows="3" name="comment"></textarea>
+				<div class="col-sm-6">
+					<textarea class="form-control" id="comment-id" rows="3" name="user_comment"></textarea>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-sm-3"></div>
-				<div class="col-sm-9 mt-2">
+				<div class="col-sm-6 mt-2">
 					<button type="submit" class="btn btn-color rounded-0">Submit</button>
 				</div>
 			</div>

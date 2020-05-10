@@ -144,6 +144,13 @@ a:hover {
 	display: none;
 }
 
+.custom-range::-webkit-slider-runnable-track {
+	background: #990000;
+}
+.custom-range::-webkit-slider-thumb {
+	background: #FFC72C;
+}
+
 .footer-div {
 	position: relative;
 }
