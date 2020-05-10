@@ -55,6 +55,24 @@
 			$rating = 0;
 		}
 		// echo $rating;
+
+		define("RPP", 5);
+		$num_reviews = sizeof($reviews);
+		$last_page = ceil($num_reviews / RPP);
+		$current_page = 1;
+
+		if (isset($_GET["page"]) && !empty($_GET["page"])) {
+			$current_page = (int)$_GET["page"];
+		}
+
+		if ($current_page < 1) {
+			$current_page = 1;
+		}
+		elseif ($current_page > $last_page) {
+			$current_page = $last_page;
+		}
+
+		$start_index = ($current_page - 1) * RPP;
 	}
 
 	if (isset($dorm) && !empty($dorm)) {
@@ -184,7 +202,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<?php for ($i = 0; $i < sizeof($reviews); $i++) : ?>
+								<?php for ($i = $start_index; $i < $start_index + RPP && $i < sizeof($reviews); $i++) : ?>
 									<tr>
 										<td><?php echo $reviews[$i]["user_name"]; ?></td>
 										<td><?php echo $reviews[$i]["review_date"]; ?></td>
@@ -212,6 +230,29 @@
 								<?php endfor; ?>
 							</tbody>
 						</table>
+						<nav id="page">
+						  <ul class="pagination justify-content-center">
+						    <li class="page-item"><a class="page-link page-color" href="<?php echo "dorm.php?dorm_id=" . $_GET["dorm_id"] . "&page=" . strval($current_page - 1); ?>">PREV</a></li>
+						    <?php for ($i = -1; $i < 2; $i++) : ?>
+						    	<?php if ($current_page + $i >= 1 && $current_page + $i <= $last_page) : ?>
+						    		<?php if ($current_page + $i == $current_page) : ?>
+								    	<li class="page-item">
+								    			<a class="page-link page-color page-active" href="<?php echo "dorm.php?dorm_id=" . $_GET["dorm_id"] . "&page=" . strval($current_page + $i); ?>">
+								    			<?php echo $current_page + $i; ?>
+							    			</a>
+							    		</li>
+					    			<?php else : ?>
+								    	<li class="page-item">
+								    			<a class="page-link page-color" href="<?php echo "dorm.php?dorm_id=" . $_GET["dorm_id"] . "&page=" . strval($current_page + $i); ?>">
+								    			<?php echo $current_page + $i; ?>
+							    			</a>
+							    		</li>
+						    		<?php endif; ?>
+						    	<?php endif; ?>
+						    <?php endfor; ?>
+						    <li class="page-item"><a class="page-link page-color" href="<?php echo "dorm.php?dorm_id=" . $_GET["dorm_id"] . "&page=" . strval($current_page + 1); ?>">NEXT</a></li>
+						  </ul>
+						</nav>
 					</div>
 				</div>
 			</div>
