@@ -22,19 +22,18 @@
 
 	var_dump($_POST);
 
-	$sql = "SELECT * FROM reviews WHERE review_id = ";
-	$sql = $sql . $_POST["review_id"];
-
-	$result = $mysqli->query($sql);
-	if (!$result) {
-		echo "SQL Error";
-		exit();
-	}
-	$review = $result->fetch_assoc();
-
 	$isUpdate = 0;
 	if (isset($_POST["isUpdate"]) && !empty($_POST["isUpdate"])) {
 		$isUpdate = 1;
+		$sql = "SELECT * FROM reviews WHERE review_id = ";
+		$sql = $sql . $_POST["review_id"];
+
+		$result = $mysqli->query($sql);
+		if (!$result) {
+			echo "SQL Error";
+			exit();
+		}
+		$review = $result->fetch_assoc();
 	}
 ?>
 <!DOCTYPE html>

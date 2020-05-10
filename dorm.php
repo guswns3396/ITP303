@@ -201,9 +201,11 @@
 										</td>
 										<td>
 											<?php if ($_SESSION["logged"] && ($_SESSION["user_name"] == $reviews[$i]["user_name"] || $_SESSION["user_admin"])) : ?>
-												<a href="dorm.php?dorm_id=<?php echo $dorm["dorm_id"]; ?>" class="btn btn-color-danger rounded-0">
-													DELETE
-												</a>
+												<form action="delete_confirmation.php" method="POST">
+													<input type="hidden" name="review_id" value="<?php echo $reviews[$i]["review_id"]; ?>"/>
+													<input type="hidden" name="dorm_id" value="<?php echo $dorm["dorm_id"]; ?>"/>
+													<button type="submit" class="btn btn-color-danger rounded-0">DELETE</button>
+												</form>
 											<?php endif; ?>
 										</td>
 									</tr>
