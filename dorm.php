@@ -215,7 +215,7 @@
 										<td><?php echo $reviews[$i]["review_rating"]; ?></td>
 										<td><?php echo $reviews[$i]["review_comment"]; ?></td>
 										<td>
-											<?php if ($_SESSION["logged"] && ($_SESSION["user_name"] == $reviews[$i]["user_name"])) : ?>
+											<?php if ($_SESSION["logged"] && ($_SESSION["user_name"] == $reviews[$i]["user_name"] || $_SESSION["user_admin"])) : ?>
 												<form action="review.php" method="POST">
 													<input type="hidden" name="isUpdate" value="1"/>
 													<input type="hidden" name="review_id" value="<?php echo $reviews[$i]["review_id"]; ?>"/>
