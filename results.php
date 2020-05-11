@@ -14,7 +14,7 @@
 
 	// var_dump($_GET);
 	$sql = "SELECT * FROM";
-	$sql = $sql . " (SELECT * FROM dorms NATURAL JOIN locations NATURAL JOIN prices";
+	$sql = $sql . " (SELECT *, dorm_id AS id FROM dorms NATURAL JOIN locations NATURAL JOIN prices";
 	$sql = $sql . " NATURAL JOIN room_types) D";
 	$sql = $sql . " LEFT OUTER JOIN";
 	$sql = $sql . " (SELECT dorm_id, AVG(review_rating) AS review_rating FROM reviews";
@@ -81,6 +81,7 @@
 						<tr>
 							<th></th>
 							<th>Name</th>
+							<th>Rating</th>
 							<th>Location</th>
 							<th>Price</th>
 							<th>Room Type</th>
@@ -90,11 +91,21 @@
 						<?php while ($row = $results->fetch_assoc()) : ?>
 							<tr>
 								<td>
-									<a href="dorm.php?dorm_id=<?php echo $row["dorm_id"]; ?>" class="btn btn-color rounded-0">
+									<a href="dorm.php?dorm_id=<?php echo $row["id"]; ?>" class="btn btn-color rounded-0">
 										GO TO
 									</a>
 								</td>
 								<td><?php echo $row["dorm_name"]; ?></td>
+								<td>
+									<?php
+										if (isset($row["review_rating"]) && !empty($row["review_rating"])) {
+											echo number_format($row["review_rating"],1);
+										}
+										else {
+											echo "0.0";
+										}
+									?>
+								</td>
 								<td><?php echo $row["location_name"]; ?></td>
 								<td><?php echo $row["price"]; ?></td>
 								<td><?php echo $row["room_type_name"]; ?></td>
