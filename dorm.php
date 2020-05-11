@@ -34,7 +34,7 @@
 
 		$dorm = $results->fetch_assoc();
 
-		$sql = "SELECT * FROM reviews NATURAL JOIN users WHERE dorm_id = ?";
+		$sql = "SELECT * FROM reviews NATURAL JOIN users WHERE dorm_id = ? ORDER BY review_date";
 		// echo $sql;
 
 		$stmt = $mysqli->prepare($sql);
