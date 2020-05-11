@@ -59,6 +59,7 @@
 		}
 		else {
 			$rating = 0;
+			$noReviews = true;
 		}
 		// echo $rating;
 
@@ -208,7 +209,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<?php for ($i = $start_index; $i < $start_index + RPP && $i < sizeof($reviews); $i++) : ?>
+								<?php for ($i = $start_index; $i < $start_index + RPP && !$noReviews && $i < sizeof($reviews); $i++) : ?>
 									<tr>
 										<td><?php echo $reviews[$i]["user_name"]; ?></td>
 										<td><?php echo $reviews[$i]["review_date"]; ?></td>
