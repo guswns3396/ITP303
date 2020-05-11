@@ -18,11 +18,14 @@
 		$mysqli->set_charset("utf8");
 
 		$sql = "SELECT * FROM dorms NATURAL JOIN locations";
-		$sql = $sql . " NATURAL JOIN prices NATURAL JOIN room_types WHERE dorm_id = ";
-		$sql = $sql . $_GET["dorm_id"] . ";";
+		$sql = $sql . " NATURAL JOIN prices NATURAL JOIN room_types WHERE dorm_id = ?";
 		// echo $sql;
 
-		$results = $mysqli->query($sql);
+		$stmt = $mysqli->prepare($sql);
+		$stmt->bind_param("i", $_GET["dorm_id"]);
+		$stmt->execute();
+
+		$results = $stmt->get_result();
 
 		if (!$results) {
 			header("location: ./error.php");
@@ -31,11 +34,14 @@
 
 		$dorm = $results->fetch_assoc();
 
-		$sql = "SELECT * FROM reviews NATURAL JOIN users WHERE dorm_id = ";
-		$sql = $sql . $_GET["dorm_id"] . ";";
+		$sql = "SELECT * FROM reviews NATURAL JOIN users WHERE dorm_id = ?";
 		// echo $sql;
 
-		$results = $mysqli->query($sql);
+		$stmt = $mysqli->prepare($sql);
+		$stmt->bind_param("i", $_GET["dorm_id"]);
+		$stmt->execute();
+
+		$results = $stmt->get_result();
 
 		if (!$results) {
 			header("location: ./error.php");

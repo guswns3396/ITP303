@@ -37,10 +37,14 @@
 	$isUpdate = 0;
 	if (isset($_POST["isUpdate"]) && !empty($_POST["isUpdate"])) {
 		$isUpdate = 1;
-		$sql = "SELECT * FROM reviews WHERE review_id = ";
-		$sql = $sql . $_POST["review_id"];
+		$sql = "SELECT * FROM reviews WHERE review_id = ?";
 
-		$result = $mysqli->query($sql);
+		$stmt = $mysqli->prepare($sql);
+		$stmt->bind_param("i", $_POST["review_id"]);
+		$stmt->execute();
+
+		$result = $stmt->get_result();
+
 		if (!$result) {
 			header("location: ./error.php");
 			exit();
